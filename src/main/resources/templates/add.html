@@ -35,7 +35,11 @@
             </div>
             <div class="form-group">
               <label for="datum">Datum:</label>
-              <input type="datetime-local" class="form-control" id="datum" name="datum" th:field="*{abholdatum}" required>
+              <input type="date" pattern="dd-MM-yyyy" class="form-control" id="datum" name="datum" th:field="*{abholdatum}" required>
+            </div>
+            <div class="form-group">
+              <label for="abholzeit">Abholzeitpunkt:</label>
+              <input type="time" min="04:30" step="2700" class="form-control" id="abholzeit" name="abholzeit" th:field="*{abholzeit}" required>
             </div>
             <div class="form-group">
               <label for="abholort">Abholort:</label>
@@ -47,7 +51,7 @@
             </div>
             <div class="form-group">
               <label for="telefon">Tel. Kunde:</label>
-              <input type="tel" pattern="[0-9]{9}" class="form-control" id="telefon" name="telefon" th:field="*{telefonnummer}">
+              <input type="text" class="form-control" id="telefon" name="telefon" th:field="*{telefonnummer}">
             </div>
             <a type="button" class="btn btn-secondary" th:href="@{/}">Zum Kalender</a>
             <button type="submit" class="btn btn-primary">Fertig</button>

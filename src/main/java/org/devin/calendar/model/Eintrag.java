@@ -6,7 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class Eintrag {
@@ -20,7 +21,8 @@ public class Eintrag {
 
     private String info;
 
-    private LocalDateTime abholdatum;
+    private LocalDate abholdatum;
+    private LocalTime abholzeit;
 
     private String abholOrt;
     private String zielOrt;
@@ -29,10 +31,11 @@ public class Eintrag {
     public Eintrag() {
     }
 
-    public Eintrag(String name, String info, LocalDateTime abholdatum, String abholOrt, String zielOrt, String telefonnummer) {
+    public Eintrag(String name, String info, LocalDate abholdatum,LocalTime abholzeit, String abholOrt, String zielOrt, String telefonnummer) {
         this.name = name;
         this.info = info;
         this.abholdatum = abholdatum;
+        this.abholzeit = abholzeit;
         this.abholOrt = abholOrt;
         this.zielOrt = zielOrt;
         this.telefonnummer = telefonnummer;
@@ -46,12 +49,17 @@ public class Eintrag {
         return name;
     }
 
+    public LocalDate getAbholdatum() {
+        return abholdatum;
+    }
+
+
     public String getInfo() {
         return info;
     }
 
-    public LocalDateTime getAbholdatum() {
-        return abholdatum;
+    public LocalTime getAbholzeit() {
+        return abholzeit;
     }
 
     public String getAbholOrt() {
@@ -78,8 +86,12 @@ public class Eintrag {
         this.info = info;
     }
 
-    public void setAbholdatum(LocalDateTime abholdatum) {
+    public void setAbholdatum(LocalDate abholdatum) {
         this.abholdatum = abholdatum;
+    }
+
+    public void setAbholzeit(LocalTime abholzeit) {
+        this.abholzeit = abholzeit;
     }
 
     public void setAbholOrt(String abholOrt) {
@@ -101,7 +113,9 @@ public class Eintrag {
                 Abholort: %s
                 Zielort: %s
                 Info: %s
+                Abholdatum: %s
+                Abholzeit: %s
                 Tel. Kunde: %s
-                """.formatted(name, abholOrt, zielOrt, info, telefonnummer);
+                """.formatted(name, abholOrt, zielOrt, info, abholdatum, abholzeit, telefonnummer);
     }
 }

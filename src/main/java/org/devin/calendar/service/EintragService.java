@@ -5,7 +5,7 @@ import org.devin.calendar.model.Eintrag;
 import org.devin.calendar.repository.EintragRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Service
 public class EintragService {
@@ -22,6 +22,7 @@ public class EintragService {
             eintragDTO.getName(),
             eintragDTO.getInfo(),
             eintragDTO.getAbholdatum(),
+            eintragDTO.getAbholzeit(),
             eintragDTO.getAbholOrt(),
             eintragDTO.getZielOrt(),
             eintragDTO.getTelefonnummer()
@@ -37,6 +38,7 @@ public class EintragService {
         eintrag.setName(eintragDTO.getName());
         eintrag.setInfo(eintragDTO.getInfo());
         eintrag.setAbholdatum(eintragDTO.getAbholdatum());
+        eintrag.setAbholzeit(eintragDTO.getAbholzeit());
         eintrag.setAbholOrt(eintragDTO.getAbholOrt());
         eintrag.setZielOrt(eintragDTO.getZielOrt());
         eintrag.setTelefonnummer(eintragDTO.getTelefonnummer());
@@ -65,8 +67,13 @@ public class EintragService {
             throw new IllegalArgumentException("Telefonnummer darf nicht leer sein");
         }
 
-        if(eintragDTO.getAbholdatum().isBefore(LocalDateTime.now())) {
+        if(eintragDTO.getAbholdatum().isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Abholdatum darf nicht in der Vergangenheit liegen");
         }
+
+        if(eintragDTO.getAbholzeit() == null) {
+            throw new IllegalArgumentException("Abholzeit darf nicht leer sein");
+        }
+
     }
 }

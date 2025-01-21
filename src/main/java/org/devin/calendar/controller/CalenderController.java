@@ -27,13 +27,13 @@ public class CalenderController {
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("eintragDTO", new EintragDTO());
-        System.out.println("Getmappin auf /add");
+        System.out.println("Getmapping auf /add");
         return "add";
     }
 
     @PostMapping("/add")
-    public String addEvent(RedirectAttributes redirectAttributes,@ModelAttribute EintragDTO eintragDTO) {
-        System.out.println("Postmapping auf /add/eintrag");
+    public String addEvent(@ModelAttribute EintragDTO eintragDTO, RedirectAttributes redirectAttributes) {
+        System.out.println("Postmapping auf /add");
         Eintrag createdEintrag = eintragService.createEintrag(eintragDTO);
         System.out.println(createdEintrag.toString());
         redirectAttributes.addFlashAttribute("createdEintrag", createdEintrag);
