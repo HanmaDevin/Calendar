@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eintrag</title>
+  <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <!-- Error Message Box -->
+  <div class="alert alert-danger" th:if="${error}" role="alert">
+    <strong>Fehler:</strong> <span th:text="${error}"></span>
+  </div>
+
+  <!-- Success Message Box -->
+  <div class="alert alert-success" th:if="${createdEintrag != null}" role="alert">
+    <span><strong>Eintrag Erfolgreich hinzugefügt!</strong></span>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4>Eintrag</h4>
+        </div>
+        <div class="card-body">
+          <form method="post" th:action="@{/add}" th:object="${eintragDTO}">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" name="title" th:field="*{name}" required>
+            </div>
+            <div class="form-group">
+              <label for="info">Info:</label>
+              <input type="text" class="form-control" id="info" name="info" th:field="*{info}">
+            </div>
+            <div class="form-group">
+              <label for="datum">Datum:</label>
+              <input type="datetime-local" class="form-control" id="datum" name="datum" th:field="*{abholdatum}" required>
+            </div>
+            <div class="form-group">
+              <label for="abholort">Abholort:</label>
+              <input type="text" class="form-control" id="abholort" name="abholort" th:field="*{abholOrt}" required>
+            </div>
+            <div class="form-group">
+              <label for="zielort">Zielort:</label>
+              <input type="text" class="form-control" id="zielort" name="zielort" th:field="*{zielOrt}" required>
+            </div>
+            <div class="form-group">
+              <label for="telefon">Tel. Kunde:</label>
+              <input type="tel" pattern="[0-9]{9}" class="form-control" id="telefon" name="telefon" th:field="*{telefonnummer}">
+            </div>
+            <a type="button" class="btn btn-secondary" th:href="@{/}">Zum Kalender</a>
+            <button type="submit" class="btn btn-primary">Fertig</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
